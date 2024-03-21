@@ -1,0 +1,34 @@
+package:
+  name: studio 
+  version: 0.1.0
+  epoch: 0
+  description: "CLI system manager for Atomic Studio distributions"
+  copyright:
+    - license: Apache-2.0
+      paths: ["*"]
+  dependencies:
+    runtime: 
+    - podman
+    - nushell
+  target-architecture:
+    - x86_64
+ 
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://dl-cdn.alpinelinux.org/alpine/edge/community
+    packages:
+      - bash
+
+pipeline:
+  - name: Build Studio CLI
+    runs: |
+      set -euo pipefail
+      mkdir -p build "${{targets.destdir}}/usr/bin" "${{targets.destdir}}/usr/libexec"
+      cp src/studio build/studio
+      cp -r src/libexec build/libexec
+      sed -i 's~\.\/libexec~\/usr\/libexec/~' build/studio
+      find . -type f -not -path '*/\.*' -exec sed -i 's/pkexec/sudo/g' {} +
+      cp build/studio "${{targets.destdir}}/usr/bin/studio"
+      cp -r build/libexec/* "${{targets.destdir}}/usr/libexec"
