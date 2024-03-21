@@ -1,6 +1,7 @@
 name: Build APK package
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "main"
@@ -23,6 +24,5 @@ jobs:
       - name: Upload packages
         uses: actions/upload-artifact@v4
         with:
-          name: studio-cli-packages 
+          name: studio-cli-apk-package
           path: ./packages
-
