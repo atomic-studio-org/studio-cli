@@ -2,7 +2,11 @@ name: Build APK package
 
 on:
   workflow_dispatch:
+  pull_request:
+
   push:
+    paths-ignore:
+      - README.md
     branches:
       - "main"
 
