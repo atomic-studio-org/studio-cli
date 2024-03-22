@@ -1,4 +1,7 @@
-# Studio CLI
+<div align="center">
+    <img src="./assets/studio-cli.png" alt="studio-cli logo" width="200rem"/> 
+    <h1 style="font-size: 48px; margin-left: 0.1em; text-align: center;">Studio CLI</h1>
+</div>
 
 [![Build APK package](https://github.com/atomic-studio-org/cli/actions/workflows/apk-package.yml/badge.svg)](https://github.com/atomic-studio-org/cli/actions/workflows/apk-package.yml)
 [![Publish every Git push to main to FlakeHub](https://github.com/atomic-studio-org/cli/actions/workflows/flakehub-push.yml/badge.svg)](https://github.com/atomic-studio-org/cli/actions/workflows/flakehub-push.yml)
