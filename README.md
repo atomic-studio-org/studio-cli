@@ -5,7 +5,7 @@
 
 [![Build APK package](https://github.com/atomic-studio-org/cli/actions/workflows/apk-package.yml/badge.svg)](https://github.com/atomic-studio-org/cli/actions/workflows/apk-package.yml)
 [![Publish every Git push to main to FlakeHub](https://github.com/atomic-studio-org/cli/actions/workflows/flakehub-push.yml/badge.svg)](https://github.com/atomic-studio-org/cli/actions/workflows/flakehub-push.yml)
-[![Copr build status](https://copr.fedorainfracloud.org/coprs/tulilirockz/studio-cli/package/studio-cli/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/tulilirockz/studio-cli/package/studio-cli/)
+[![Copr RPM build status](https://copr.fedorainfracloud.org/coprs/tulilirockz/studio-cli/package/studio-cli/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/tulilirockz/studio-cli/package/studio-cli/)
 
 This project is meant for [Universal Blue](https://universal-blue.org/)-based systems, specifically the [Atomic Studio](https://github.com/atomic-studio-org/Atomic-Studio) image, but you can use it on any other system through the RPM, APK or Nix packages provided.
 
