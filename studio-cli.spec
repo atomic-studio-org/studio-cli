@@ -28,12 +28,14 @@ Manages Atomic Studio installations
 %build
 
 %install
-mkdir -p %{_libexecdir}/studio-cli
-install -D -m 0755 src/studio %{buildroot}%{_bindir}/%{pname}
-cp -r src/libexec/* %{_libexecdir}/studio-cli
+mkdir -p %{buildroot}%{_libexecdir}/studio-cli %{buildroot}/%{_bindir}
+sed -i 's~\.\/libexec~\/usr\/libexec/~' src/%{pname}
+install -D -m 0755 src/%{pname} %{buildroot}%{_bindir}/%{pname}
+cp -r src/libexec/* %{buildroot}%{_libexecdir}/%{name}
 
 %files
 %license LICENSE
+%{_libexecdir}/%{name}/*
 %attr(0755,root,root) %{_bindir}/%{pname}
 
 %changelog

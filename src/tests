@@ -1,3 +1,0 @@
-use ../testing.nu [run-tests]
-
-run-tests
