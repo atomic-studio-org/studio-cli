@@ -15,6 +15,7 @@ Source:        {{{ git_dir_pack }}}
 
 BuildArch:     noarch 
 Supplements:   podman 
+Requires:      nu
 
 %description
 Manages Atomic Studio installations
