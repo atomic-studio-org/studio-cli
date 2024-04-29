@@ -2,9 +2,9 @@
 
 use lib/user_interaction.nu [user_prompt]
 use lib/distrobox.nu [DISTROBOXES_META, gen_export_string]
-use lib/manager_installers.nu [brew_install, nix_install, distrobox_install, pipx_install, brew_uninstall, nix_uninstall, distrobox_uninstall, pipx_uninstall]
+use lib/manager_installers.nu [flatpak_install, zap_install, brew_install, nix_install, distrobox_install, pipx_install, brew_uninstall, nix_uninstall, distrobox_uninstall, pipx_uninstall]
 
-# Available package managers: ["apt", "brew", "nix", "dnf", "yum", "paru", "pacman", "pipx"]
+# Available package managers: ["apt", "brew", "nix", "dnf", "yum", "paru", "pacman", "pipx", "zap", "flatpak"]
 export def "main manager" [] {
   echo "Usage manager <command>."
 }
@@ -60,6 +60,8 @@ export def "main manager install" [
     nix => { nix_install $yes $packages ; exit 0 },
     brew => { brew_install $yes $packages ; exit 0 },
     pipx => { pipx_install $yes $packages ; exit 0 },
+    zap => { zap_install $yes $packages ; exit 0 },
+    flatpak => { flatpak_install $yes $packages ; exit 0 },
   }
 
   distrobox_install $package_data (match $package_manager {
@@ -108,6 +110,8 @@ export def "main manager remove" [
     nix => { nix_uninstall $yes $packages ; exit 0 },
     brew => { brew_uninstall $yes $packages ; exit 0 },
     pipx => { pipx_uninstall $yes $packages ; exit 0 },
+    flatpak => { flatpak_uninstall $yes $packages ; exit 0 },
+    zap => { zap_uninstall $yes $packages ; exit 0 },
   }
 
   distrobox_uninstall $package_data (match $package_manager {

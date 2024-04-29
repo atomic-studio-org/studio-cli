@@ -37,6 +37,18 @@ export def pipx_install [yes: bool, packages: list<string>] {
   }
 }
 
+export def zap_install [yes: bool, packages: list<string>] {
+  for $package in $packages {
+    run-external zap install $package
+  }
+}
+
+export def flatpak_install [yes: bool, packages: list<string>] {
+  for $package in $packages {
+    run-external flatpak install $package
+  }
+}
+
 export def brew_install [yes: bool, packages: list<string>] {
   let brew_path = "/home/linuxbrew/.linuxbrew/bin/brew"
   if ((which brew | length) != 0) or ($brew_path | path exists) {
@@ -88,6 +100,19 @@ export def pipx_uninstall [yes: bool, packages: list<string>] {
   for $package in $packages {
     run-external pipx uninstall $package
   }
+}
+
+export def zap_uninstall [yes: bool, packages: list<string>] {
+  for $package in $packages {
+    run-external zap remove $package
+  }
+}
+
+export def flatpak_uninstall [yes: bool, packages: list<string>] {
+  for $package in $packages {
+    run-external flatpak remove $package
+  }
+  run-external flatpak remove '--unused'
 }
 
 export def brew_uninstall [yes: bool, packages: list<string>] {
