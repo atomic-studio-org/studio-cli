@@ -1,29 +1,14 @@
 ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-latest}"
-
-FROM registry.fedoraproject.org/fedora:${FEDORA_MAJOR_VERSION} AS builder
-
-ENV OUTPUT_ROOT=/app/output
-
-WORKDIR /app 
+ARG REGISTRY=registry.fedoraproject.org/fedora
+FROM ${REGISTRY}:${FEDORA_MAJOR_VERSION} AS builder
 
 ADD . /app
+WORKDIR /app 
+VOLUME ["/output"]
 
-RUN dnf install \
-    --disablerepo='*' \
-    --enablerepo='fedora,updates' \
-    --setopt install_weak_deps=0 \
-    --nodocs \
-    --assumeyes \
-    'dnf-command(builddep)' \
-    rpkg \
-    rpm-build && \
-    mkdir -p $OUTPUT_ROOT/{,output,atomic-studio/rpms} && \
-    rpkg spec --outdir  "$OUTPUT_ROOT" && \
-    dnf builddep -y output/studio-cli.spec && \
-    rpkg local --outdir "$OUTPUT_ROOT/output" && \
-    mv ${OUTPUT_ROOT}/output/noarch/* "${OUTPUT_ROOT}/atomic-studio/rpms"
-
-FROM scratch
-
-ENV OUTPUT_ROOT=/app/output
-COPY --from=builder ${OUTPUT_ROOT}/atomic-studio/rpms /rpms
+RUN dnf install --disablerepo='*' --enablerepo='fedora,updates' --setopt install_weak_deps=0 --nodocs --assumeyes 'dnf-command(builddep)' rpkg rpm-build
+    
+RUN mkdir -p /output/{,atomic-studio/rpms} && \
+    rpkg spec --outdir /output && \
+    dnf builddep -y /output/studio-cli.spec && \
+    rpkg local --outdir /output

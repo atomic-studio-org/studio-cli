@@ -1,0 +1,15 @@
+version: "3"
+
+tasks:
+  build:rpm:
+    desc: Generate RPM specs, definitions and files from the Studio-CLI containerfile.
+    generates:
+      - output/*
+    cmds:
+      - mkdir -p {{.OUT}}
+      - "{{.CONTAINER_MANAGER}} build -v $(realpath {{.OUT}}):/output:Z -f {{.TARGET}} . {{.CLI_ARGS}}"
+    vars:
+      CONTAINER_MANAGER: podman
+      TARGET: rpm.Containerfile
+      OUT: output
+  build:

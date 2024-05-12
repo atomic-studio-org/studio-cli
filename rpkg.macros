@@ -1,6 +1,6 @@
-function studio-cli_version {
+function git_ref {
     if [ "$GITHUB_REF_NAME" = "" ]; then
-        echo "0.1.0+$(git rev-parse --short HEAD)"
+        echo "$(git rev-parse --short HEAD)"
     else
         echo "$GITHUB_REF_NAME" 
     fi
